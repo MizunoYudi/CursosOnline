@@ -54,7 +54,7 @@ export class InstrutorRepository {
             return undefined;
         }
         console.log("Instrutor encontrado: ", instrutor);
-        return new InstrutorEntity(instrutor.nome, instrutor.email, instrutor.cpf, instrutor.id);
+        return new InstrutorEntity(instrutor.nome, instrutor.email, instrutor.especialidade, instrutor.id);
     }
 
     async buscarInstrutores(){
