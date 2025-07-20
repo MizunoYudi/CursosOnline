@@ -54,7 +54,7 @@ export class AlunoRepository {
         return new AlunoEntity(aluno.nome, aluno.email, aluno.cpf, aluno.id);
     }
 
-    async buscarAlunos(id: number){
+    async buscarAlunos(){
         const query = `
             select * from cursosonline.Aluno;
         `
