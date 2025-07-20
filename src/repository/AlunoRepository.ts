@@ -48,8 +48,11 @@ export class AlunoRepository {
         const query = `
             select * from cursosonline.Aluno where id = ?;
         `;
-        const resultado = await executarSQL(query, []);
+        const resultado = await executarSQL(query, [id]);
         const aluno = resultado[0];
+        if(aluno == undefined){
+            return undefined;
+        }
         console.log("Aluno encontrado: ", aluno);
         return new AlunoEntity(aluno.nome, aluno.email, aluno.cpf, aluno.id);
     }
@@ -59,6 +62,9 @@ export class AlunoRepository {
             select * from cursosonline.Aluno;
         `
         const resultado = await executarSQL(query, []);
+        if(resultado.length == 0){
+            return undefined;
+        }
         console.log("Alunos encontrados: ", resultado);
         return resultado;
     }
@@ -67,21 +73,20 @@ export class AlunoRepository {
         const query = `
             update cursosonline.Aluno
                 set nome = ?,
-                set email = ?
+                email = ?
             where id = ?;
         `
         const resultado = await executarSQL(query, [data.nome, data.email, id]);
         console.log("Usuario atualizado: ", resultado);
-        const aluno = resultado[0];
-        return this.buscarAlunoId(aluno.id);
+        return this.buscarAlunoId(id);
     }
 
-    async removerAluno(id: number){
+    async excluirAluno(id: number){
         const query = `
-            delete cursosonline.Aluno where id = ?;
+            delete from cursosonline.Aluno where id = ?;
         `
+        const usuario = await this.buscarAlunoId(id);
         const resultado = await executarSQL(query, [id]);
-        const usuario = this.buscarAlunoId(id);
         console.log("Usuario excluido: ", usuario, "\nResultado: ", resultado);
         return usuario;
     }
