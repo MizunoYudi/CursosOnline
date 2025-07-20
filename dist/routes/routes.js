@@ -3,15 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterRoutes = RegisterRoutes;
 const runtime_1 = require("@tsoa/runtime");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+const InstrutorController_1 = require("./../controller/InstrutorController");
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const AlunoController_1 = require("./../controller/AlunoController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const models = {
-    "AlunoInsertDto": {
+    "InstrutorDto": {
         "dataType": "refObject",
         "properties": {
             "nome": { "dataType": "string", "required": true },
             "email": { "dataType": "string", "required": true },
-            "cpf": { "dataType": "string", "required": true },
+            "especialidade": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
     },
@@ -21,6 +23,16 @@ const models = {
         "properties": {
             "message": { "dataType": "string", "required": true },
             "object": { "dataType": "any", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AlunoInsertDto": {
+        "dataType": "refObject",
+        "properties": {
+            "nome": { "dataType": "string", "required": true },
+            "email": { "dataType": "string", "required": true },
+            "cpf": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
     },
@@ -42,6 +54,131 @@ function RegisterRoutes(app) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
+    const argsInstrutorController_cadastrarInstrutor = {
+        dto: { "in": "body", "name": "dto", "required": true, "ref": "InstrutorDto" },
+        sucess: { "in": "res", "name": "201", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.post('/instrutores', ...((0, runtime_1.fetchMiddlewares)(InstrutorController_1.InstrutorController)), ...((0, runtime_1.fetchMiddlewares)(InstrutorController_1.InstrutorController.prototype.cadastrarInstrutor)), async function InstrutorController_cadastrarInstrutor(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsInstrutorController_cadastrarInstrutor, request, response });
+            const controller = new InstrutorController_1.InstrutorController();
+            await templateService.apiHandler({
+                methodName: 'cadastrarInstrutor',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsInstrutorController_filtrarInstrutorId = {
+        id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.get('/instrutores/:id', ...((0, runtime_1.fetchMiddlewares)(InstrutorController_1.InstrutorController)), ...((0, runtime_1.fetchMiddlewares)(InstrutorController_1.InstrutorController.prototype.filtrarInstrutorId)), async function InstrutorController_filtrarInstrutorId(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsInstrutorController_filtrarInstrutorId, request, response });
+            const controller = new InstrutorController_1.InstrutorController();
+            await templateService.apiHandler({
+                methodName: 'filtrarInstrutorId',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsInstrutorController_listarInstrutores = {
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.get('/instrutores', ...((0, runtime_1.fetchMiddlewares)(InstrutorController_1.InstrutorController)), ...((0, runtime_1.fetchMiddlewares)(InstrutorController_1.InstrutorController.prototype.listarInstrutores)), async function InstrutorController_listarInstrutores(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsInstrutorController_listarInstrutores, request, response });
+            const controller = new InstrutorController_1.InstrutorController();
+            await templateService.apiHandler({
+                methodName: 'listarInstrutores',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsInstrutorController_atualizarInstrutor = {
+        id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        dto: { "in": "body", "name": "dto", "required": true, "ref": "InstrutorDto" },
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.put('/instrutores/:id', ...((0, runtime_1.fetchMiddlewares)(InstrutorController_1.InstrutorController)), ...((0, runtime_1.fetchMiddlewares)(InstrutorController_1.InstrutorController.prototype.atualizarInstrutor)), async function InstrutorController_atualizarInstrutor(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsInstrutorController_atualizarInstrutor, request, response });
+            const controller = new InstrutorController_1.InstrutorController();
+            await templateService.apiHandler({
+                methodName: 'atualizarInstrutor',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsInstrutorController_removerInstrutor = {
+        id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.delete('/instrutores/:id', ...((0, runtime_1.fetchMiddlewares)(InstrutorController_1.InstrutorController)), ...((0, runtime_1.fetchMiddlewares)(InstrutorController_1.InstrutorController.prototype.removerInstrutor)), async function InstrutorController_removerInstrutor(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsInstrutorController_removerInstrutor, request, response });
+            const controller = new InstrutorController_1.InstrutorController();
+            await templateService.apiHandler({
+                methodName: 'removerInstrutor',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     const argsAlunosController_cadastrarAluno = {
         dto: { "in": "body", "name": "dto", "required": true, "ref": "AlunoInsertDto" },
         sucess: { "in": "res", "name": "201", "required": true, "ref": "BasicResponseDto" },

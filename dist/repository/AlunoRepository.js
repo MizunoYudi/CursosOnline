@@ -28,7 +28,7 @@ class AlunoRepository {
             console.log("Tabela Aluno criada: ", resultado);
         }
         catch (error) {
-            console.log("Erro ao criar a tabela Usuario: ", error);
+            console.log("Erro ao criar a tabela Aluno: ", error);
         }
     }
     async inserirAluno(data) {
@@ -71,7 +71,7 @@ class AlunoRepository {
             where id = ?;
         `;
         const resultado = await (0, mysql_1.executarSQL)(query, [data.nome, data.email, id]);
-        console.log("Usuario atualizado: ", resultado);
+        console.log("Alunos atualizado: ", resultado);
         return this.buscarAlunoId(id);
     }
     async excluirAluno(id) {
@@ -80,7 +80,7 @@ class AlunoRepository {
         `;
         const usuario = await this.buscarAlunoId(id);
         const resultado = await (0, mysql_1.executarSQL)(query, [id]);
-        console.log("Usuario excluido: ", usuario, "\nResultado: ", resultado);
+        console.log("Alunos excluido: ", usuario, "\nResultado: ", resultado);
         return usuario;
     }
 }

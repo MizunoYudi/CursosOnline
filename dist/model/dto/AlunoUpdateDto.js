@@ -4,9 +4,9 @@ exports.AlunoUpdateDto = void 0;
 class AlunoUpdateDto {
     nome;
     email;
-    constructor(aluno, nome, email) {
-        this.nome = nome || aluno.nome;
-        this.email = email || aluno.email;
+    constructor(nome, email) {
+        this.nome = nome || '';
+        this.email = email || '';
     }
 }
 exports.AlunoUpdateDto = AlunoUpdateDto;
