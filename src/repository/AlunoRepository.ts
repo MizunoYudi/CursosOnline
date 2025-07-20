@@ -29,7 +29,7 @@ export class AlunoRepository {
             const resultado = await executarSQL(query, []);
             console.log("Tabela Aluno criada: ", resultado);
         } catch (error: any) {
-            console.log("Erro ao criar a tabela Usuario: ", error);
+            console.log("Erro ao criar a tabela Aluno: ", error);
         }
     }
 
@@ -77,7 +77,7 @@ export class AlunoRepository {
             where id = ?;
         `
         const resultado = await executarSQL(query, [data.nome, data.email, id]);
-        console.log("Usuario atualizado: ", resultado);
+        console.log("Alunos atualizado: ", resultado);
         return this.buscarAlunoId(id);
     }
 
@@ -87,7 +87,7 @@ export class AlunoRepository {
         `
         const usuario = await this.buscarAlunoId(id);
         const resultado = await executarSQL(query, [id]);
-        console.log("Usuario excluido: ", usuario, "\nResultado: ", resultado);
+        console.log("Alunos excluido: ", usuario, "\nResultado: ", resultado);
         return usuario;
     }
 }
