@@ -26,7 +26,7 @@ export class InstrutorRepository {
             )
         `;
         try {
-            const resultado = executarSQL(query, []);
+            const resultado = await executarSQL(query, []);
             console.log("Tabela Instrutor criada: ", resultado);
         } catch(error: any){
             console.log("Erro ao criar tabela Instrutor: ", error);
