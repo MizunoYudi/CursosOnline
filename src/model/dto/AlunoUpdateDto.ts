@@ -5,11 +5,10 @@ export class AlunoUpdateDto {
     email: string;
 
     constructor(
-        aluno: AlunoEntity,
         nome?: string,
         email?: string
     ) {
-        this.nome = nome || aluno.nome;
-        this.email = email || aluno.email;
+        this.nome = nome || '';
+        this.email = email || '';
     }
 }
