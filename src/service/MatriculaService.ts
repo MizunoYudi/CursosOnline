@@ -37,7 +37,7 @@ export class MatriculaService {
         if (!id) {
             throw new Error("Insira o id da matricula a ser removida");
         }
-        if(await this.existeMatricula(id)){
+        if (await this.existeMatricula(id)) {
             return await this.matriculaRepository.excluirMatricula(id);
         }
     }
