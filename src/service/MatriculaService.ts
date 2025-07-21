@@ -57,7 +57,7 @@ export class MatriculaService {
         return true;
     }
 
-    async existeMatricula(id: number) {
+    private async existeMatricula(id: number) {
         const matricula = await this.matriculaRepository.buscarMatriculaId(id);
         if (matricula == undefined) {
             throw new Error("Matricula não encontrada");
