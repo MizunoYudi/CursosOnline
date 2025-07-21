@@ -22,7 +22,7 @@ export class CursoRepository {
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 titulo VARCHAR(80) NOT NULL,
                 descricao VARCHAR(120) NOT NULL,
-                instrutor_id INT NOT NULL,
+                instrutorId INT NOT NULL,
                 FOREIGN KEY (instrutorId) REFERENCES cursosonline.Instrutor(id)
             )
         `;
@@ -34,9 +34,9 @@ export class CursoRepository {
         }
     }
 
-    async inserirCurso(data: CursoEntity){
+    async inserirCurso(data: CursoEntity){ 
         const query = `
-            insert into cursosonline.Curso(titulo, descricao, instrutor_id)
+            insert into cursosonline.Curso(titulo, descricao, instrutorId)
                 values(?, ?, ?);
         `;
         const resultado = await executarSQL(query, [data.titulo, data.descricao, data.instrutorId]);
@@ -54,7 +54,7 @@ export class CursoRepository {
             return undefined;
         }
         console.log("Curso encontrado: ", curso);
-        return new CursoEntity(curso.titulo, curso.descricao, curso.instrutor_id, curso.id);
+        return new CursoEntity(curso.titulo, curso.descricao, curso.instrutorId, curso.id);
     }
 
     async buscarCursos(){
@@ -76,7 +76,7 @@ export class CursoRepository {
                 descricao = ?
             where id = ?;
         `
-        const resultado = executarSQL(query, [data.titulo, data.titulo, id]);
+        const resultado = executarSQL(query, [data.titulo, data.descricao, id]);
         console.log("Curso atualizado: ", resultado);
         return this.buscarCursoId(id);
     }
