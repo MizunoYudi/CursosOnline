@@ -13,6 +13,8 @@ export class CursoService {
         const curso = new CursoEntity(data.titulo, data.descricao, data.instrutorId);
         if(await this.cursoRepository.existeInstrutor(curso.instrutorId)){
             return await this.cursoRepository.inserirCurso(curso);
+        } else {
+            throw new Error(`Não existe instrutor de id ${data.instrutorId} cadastrado`);
         }
     }
 
@@ -53,7 +55,7 @@ export class CursoService {
     }
 
     async existeCurso(curso_id:number){
-        const curso = this.cursoRepository.buscarCursoId(curso_id);
+        const curso = await this.cursoRepository.buscarCursoId(curso_id);
         if(curso == undefined){
             throw new Error("Curso não encontrado");
         }
