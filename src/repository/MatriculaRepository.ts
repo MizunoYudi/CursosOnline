@@ -1,4 +1,5 @@
 import { executarSQL } from "../database/mysql";
+import { MatriculaDto } from "../model/dto/MatriculaDto";
 import { MatriculaEntity } from "../model/entity/MatriculaEntity";
 
 export class MatriculaRepository {
@@ -41,7 +42,7 @@ export class MatriculaRepository {
         `;
         const resultado = await executarSQL(query, [data.alunoId, data.cursoId, data.dataMatricula]);
         console.log("Matricula inserida: ", resultado);
-        return new MatriculaEntity(data.alunoId, data.cursoId, resultado.InsertId);
+        return await this.buscarMatriculaId(resultado.insertId);
     }
 
     async buscarMatriculaId(id: number) {
@@ -54,7 +55,7 @@ export class MatriculaRepository {
             return undefined;
         }
         console.log("Matricula encontrada: ", matricula);
-        return new MatriculaEntity(matricula.titulo, matricula.descricao, matricula.dataMatricula, matricula.id);
+        return new MatriculaEntity(matricula.alunoId, matricula.cursoId, matricula.dataMatricula, matricula.id);
     }
 
     async buscarMatriculas() {
@@ -77,6 +78,17 @@ export class MatriculaRepository {
         const resultado = await executarSQL(query, [id]);
         console.log("Matricula removida: ", matricula, "\nResultado: ", resultado);
         return matricula;
+    }
+
+    async existeCopiaMatricula(data: MatriculaDto){
+        const query = `
+            select * from cursosonline.Matricula where alunoId = ? and cursoId = ?;
+        `;
+        const resultado = await executarSQL(query, [data.alunoId, data.cursoId]);
+        if(resultado[0] == undefined){
+            return false;
+        }
+        return true;
     }
 
     async existeCurso(curso_id: number){
