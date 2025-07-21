@@ -61,7 +61,7 @@ let InstrutorController = class InstrutorController {
     async removerInstrutor(id, sucess, fail) {
         try {
             const instrutor = await this.instrutorService.removerInstrutor(id);
-            sucess(200, new BasicResponseDto_1.BasicResponseDto("Aluno removido", instrutor));
+            sucess(200, new BasicResponseDto_1.BasicResponseDto("Instrutor removido", instrutor));
         }
         catch (error) {
             return fail(400, new BasicResponseDto_1.BasicResponseDto(`Erro ao remover instrutor: ${error.message}`, undefined));

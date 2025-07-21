@@ -5,6 +5,8 @@ const runtime_1 = require("@tsoa/runtime");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const InstrutorController_1 = require("./../controller/InstrutorController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+const CursoController_1 = require("./../controller/CursoController");
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const AlunoController_1 = require("./../controller/AlunoController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const models = {
@@ -23,6 +25,25 @@ const models = {
         "properties": {
             "message": { "dataType": "string", "required": true },
             "object": { "dataType": "any", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CursoInsertDto": {
+        "dataType": "refObject",
+        "properties": {
+            "titulo": { "dataType": "string", "required": true },
+            "descricao": { "dataType": "string", "required": true },
+            "instrutorId": { "dataType": "double", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CursoUpdateDto": {
+        "dataType": "refObject",
+        "properties": {
+            "titulo": { "dataType": "string", "required": true },
+            "descricao": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
     },
@@ -167,6 +188,131 @@ function RegisterRoutes(app) {
             const controller = new InstrutorController_1.InstrutorController();
             await templateService.apiHandler({
                 methodName: 'removerInstrutor',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsCursoController_cadastrarCurso = {
+        dto: { "in": "body", "name": "dto", "required": true, "ref": "CursoInsertDto" },
+        sucess: { "in": "res", "name": "201", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.post('/cursos', ...((0, runtime_1.fetchMiddlewares)(CursoController_1.CursoController)), ...((0, runtime_1.fetchMiddlewares)(CursoController_1.CursoController.prototype.cadastrarCurso)), async function CursoController_cadastrarCurso(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsCursoController_cadastrarCurso, request, response });
+            const controller = new CursoController_1.CursoController();
+            await templateService.apiHandler({
+                methodName: 'cadastrarCurso',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsCursoController_filtrarCursoId = {
+        id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.get('/cursos/:id', ...((0, runtime_1.fetchMiddlewares)(CursoController_1.CursoController)), ...((0, runtime_1.fetchMiddlewares)(CursoController_1.CursoController.prototype.filtrarCursoId)), async function CursoController_filtrarCursoId(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsCursoController_filtrarCursoId, request, response });
+            const controller = new CursoController_1.CursoController();
+            await templateService.apiHandler({
+                methodName: 'filtrarCursoId',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsCursoController_listarCurso = {
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.get('/cursos', ...((0, runtime_1.fetchMiddlewares)(CursoController_1.CursoController)), ...((0, runtime_1.fetchMiddlewares)(CursoController_1.CursoController.prototype.listarCurso)), async function CursoController_listarCurso(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsCursoController_listarCurso, request, response });
+            const controller = new CursoController_1.CursoController();
+            await templateService.apiHandler({
+                methodName: 'listarCurso',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsCursoController_atualizarCurso = {
+        id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        dto: { "in": "body", "name": "dto", "required": true, "ref": "CursoUpdateDto" },
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.put('/cursos/:id', ...((0, runtime_1.fetchMiddlewares)(CursoController_1.CursoController)), ...((0, runtime_1.fetchMiddlewares)(CursoController_1.CursoController.prototype.atualizarCurso)), async function CursoController_atualizarCurso(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsCursoController_atualizarCurso, request, response });
+            const controller = new CursoController_1.CursoController();
+            await templateService.apiHandler({
+                methodName: 'atualizarCurso',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsCursoController_removerCurso = {
+        id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.delete('/cursos/:id', ...((0, runtime_1.fetchMiddlewares)(CursoController_1.CursoController)), ...((0, runtime_1.fetchMiddlewares)(CursoController_1.CursoController.prototype.removerCurso)), async function CursoController_removerCurso(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsCursoController_removerCurso, request, response });
+            const controller = new CursoController_1.CursoController();
+            await templateService.apiHandler({
+                methodName: 'removerCurso',
                 controller,
                 response,
                 next,
