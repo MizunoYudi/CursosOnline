@@ -7,11 +7,12 @@ export class MatriculaEntity{
     constructor(
         alunoId: number,
         cursoId: number,
+        dataMatricula?: Date,
         id?: number
     ){
         this.alunoId = alunoId || 0;
         this.cursoId = cursoId || 0;
-        this.dataMatricula = new Date();
+        this.dataMatricula = dataMatricula || new Date();
         this.id = id || 0;
     }
 }
