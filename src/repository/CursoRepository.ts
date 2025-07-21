@@ -16,7 +16,7 @@ export class CursoRepository {
         this.criarTabela();
     }
 
-    async criarTabela(): Promise<void> {
+    private async criarTabela(): Promise<void> {
         const query = `
             CREATE TABLE IF NOT EXISTS cursosonline.Curso (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -69,7 +69,7 @@ export class CursoRepository {
         return resultado;
     }
 
-    async atualizarCursos(data: CursoUpdateDto,id: number){
+    async atualizarCurso(data: CursoUpdateDto,id: number){
         const query = `
             update cursosonline.Curso
                 set titulo = ?,
@@ -89,5 +89,16 @@ export class CursoRepository {
         const resultado = executarSQL(query, [id]);
         console.log("Curso removido: ", curso, "\nResuldado: ", resultado);
         return curso;
+    }
+
+    async existeInstrutor(instrutor_id: number){
+        const query = `
+            select * from instrutor where id = ?
+        `;
+        const resultado = await executarSQL(query, [instrutor_id]);
+        if(resultado[0] == undefined){
+            return false;
+        }
+        return true;
     }
 }
