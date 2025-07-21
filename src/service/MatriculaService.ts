@@ -42,7 +42,17 @@ export class MatriculaService {
         }
     }
 
-    private async validarMatricula(data: MatriculaDto) {
+    private async validarMatricula(data: MatriculaDto){
+        if(await this.matriculaRepository.existeCopiaMatricula(data)){
+            throw new Error("O aluno já esta cadastrado no curso");
+        } else {
+            if(await this.existeCursoAluno(data)){
+                return true
+            }
+        }
+    }
+
+    private async existeCursoAluno(data: MatriculaDto) {
         const curso = await this.matriculaRepository.existeCurso(data.cursoId);
         const aluno = await this.matriculaRepository.existeAluno(data.alunoId);
         if (!aluno && !curso) {
