@@ -57,7 +57,7 @@ export class MatriculaRepository {
         return new MatriculaEntity(matricula.titulo, matricula.descricao, matricula.dataMatricula, matricula.id);
     }
 
-    async buscarMatricular() {
+    async buscarMatriculas() {
         const query = `
             select * from cursosonline.Matricula;
         `;
@@ -85,7 +85,18 @@ export class MatriculaRepository {
         `;
         const resultado = await executarSQL(query, [curso_id]);
         if(resultado[0] == undefined){
-            return false;
+            throw new Error(`Não existe curso com o id ${curso_id} cadastrado no sistema`);
+        }
+        return true;
+    }
+
+    async existeAluno(aluno_id: number){
+        const query = `
+            select * from cursosonline.Aluno where id = ?
+        `;
+        const resultado = await executarSQL(query, [aluno_id]);
+        if(resultado[0] == undefined){
+            throw new Error(`Não existe aluno com o id ${aluno_id} cadastrado no sistema`);
         }
         return true;
     }
