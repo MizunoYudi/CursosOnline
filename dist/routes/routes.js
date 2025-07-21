@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterRoutes = RegisterRoutes;
 const runtime_1 = require("@tsoa/runtime");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+const MatriculaController_1 = require("./../controller/MatriculaController");
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const InstrutorController_1 = require("./../controller/InstrutorController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const CursoController_1 = require("./../controller/CursoController");
@@ -10,12 +12,11 @@ const CursoController_1 = require("./../controller/CursoController");
 const AlunoController_1 = require("./../controller/AlunoController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const models = {
-    "InstrutorDto": {
+    "MatriculaDto": {
         "dataType": "refObject",
         "properties": {
-            "nome": { "dataType": "string", "required": true },
-            "email": { "dataType": "string", "required": true },
-            "especialidade": { "dataType": "string", "required": true },
+            "alunoId": { "dataType": "double", "required": true },
+            "cursoId": { "dataType": "double", "required": true },
         },
         "additionalProperties": false,
     },
@@ -25,6 +26,16 @@ const models = {
         "properties": {
             "message": { "dataType": "string", "required": true },
             "object": { "dataType": "any", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "InstrutorDto": {
+        "dataType": "refObject",
+        "properties": {
+            "nome": { "dataType": "string", "required": true },
+            "email": { "dataType": "string", "required": true },
+            "especialidade": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
     },
@@ -75,6 +86,105 @@ function RegisterRoutes(app) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
+    const argsMatriculaController_cadastrarMatricula = {
+        dto: { "in": "body", "name": "dto", "required": true, "ref": "MatriculaDto" },
+        sucess: { "in": "res", "name": "201", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.post('/matriculas', ...((0, runtime_1.fetchMiddlewares)(MatriculaController_1.MatriculaController)), ...((0, runtime_1.fetchMiddlewares)(MatriculaController_1.MatriculaController.prototype.cadastrarMatricula)), async function MatriculaController_cadastrarMatricula(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsMatriculaController_cadastrarMatricula, request, response });
+            const controller = new MatriculaController_1.MatriculaController();
+            await templateService.apiHandler({
+                methodName: 'cadastrarMatricula',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsMatriculaController_filtrarMatriculaID = {
+        id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.get('/matriculas/:id', ...((0, runtime_1.fetchMiddlewares)(MatriculaController_1.MatriculaController)), ...((0, runtime_1.fetchMiddlewares)(MatriculaController_1.MatriculaController.prototype.filtrarMatriculaID)), async function MatriculaController_filtrarMatriculaID(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsMatriculaController_filtrarMatriculaID, request, response });
+            const controller = new MatriculaController_1.MatriculaController();
+            await templateService.apiHandler({
+                methodName: 'filtrarMatriculaID',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsMatriculaController_listarMatriculas = {
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.get('/matriculas', ...((0, runtime_1.fetchMiddlewares)(MatriculaController_1.MatriculaController)), ...((0, runtime_1.fetchMiddlewares)(MatriculaController_1.MatriculaController.prototype.listarMatriculas)), async function MatriculaController_listarMatriculas(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsMatriculaController_listarMatriculas, request, response });
+            const controller = new MatriculaController_1.MatriculaController();
+            await templateService.apiHandler({
+                methodName: 'listarMatriculas',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    const argsMatriculaController_removerMatricula = {
+        id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        sucess: { "in": "res", "name": "200", "required": true, "ref": "BasicResponseDto" },
+        fail: { "in": "res", "name": "400", "required": true, "ref": "BasicResponseDto" },
+    };
+    app.delete('/matriculas/:id', ...((0, runtime_1.fetchMiddlewares)(MatriculaController_1.MatriculaController)), ...((0, runtime_1.fetchMiddlewares)(MatriculaController_1.MatriculaController.prototype.removerMatricula)), async function MatriculaController_removerMatricula(request, response, next) {
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = templateService.getValidatedArgs({ args: argsMatriculaController_removerMatricula, request, response });
+            const controller = new MatriculaController_1.MatriculaController();
+            await templateService.apiHandler({
+                methodName: 'removerMatricula',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+            });
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     const argsInstrutorController_cadastrarInstrutor = {
         dto: { "in": "body", "name": "dto", "required": true, "ref": "InstrutorDto" },
         sucess: { "in": "res", "name": "201", "required": true, "ref": "BasicResponseDto" },
