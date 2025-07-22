@@ -97,7 +97,7 @@ export class InstrutorRepository {
             select * from cursosonline.Curso where instrutorId = ?;
         `;
         const resultado = await executarSQL(query, [instrutor_id]);
-        if(resultado.length != 0){
+        if (resultado.length != 0) {
             return true;
         }
         return false;

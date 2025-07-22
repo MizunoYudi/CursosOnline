@@ -9,7 +9,7 @@ export class MatriculaRepository {
         if (!this.instance) {
             this.instance = new MatriculaRepository();
         }
-        return this.instance
+        return this.instance;
     }
 
     constructor() {
@@ -25,7 +25,7 @@ export class MatriculaRepository {
                     dataMatricula date NOT NULL,
                     FOREIGN KEY(alunoId) REFERENCES cursosonline.Aluno(id),
                     FOREIGN KEY(cursoId) REFERENCES cursosonline.Curso(id)
-                )
+                );
             `;
         try {
             const resultado = await executarSQL(query, []);
@@ -42,12 +42,12 @@ export class MatriculaRepository {
         `;
         const resultado = await executarSQL(query, [data.alunoId, data.cursoId, data.dataMatricula]);
         console.log("Matricula inserida: ", resultado);
-        return await this.buscarMatriculaId(resultado.insertId);
+        return new MatriculaEntity(data.alunoId, data.cursoId, data.dataMatricula, resultado.insertId);
     }
 
     async buscarMatriculaId(id: number) {
         const query = `
-            select * from cursosonline.Matricula where id = ?
+            select * from cursosonline.Matricula where id = ?;
         `;
         const resultado = await executarSQL(query, [id]);
         const matricula = resultado[0];
@@ -63,7 +63,7 @@ export class MatriculaRepository {
             select * from cursosonline.Matricula;
         `;
         const resultado = await executarSQL(query, []);
-        if(resultado.length == 0){
+        if (resultado.length == 0) {
             return undefined;
         }
         console.log("Matriculas Encontradas: ", resultado);
@@ -72,7 +72,7 @@ export class MatriculaRepository {
 
     async excluirMatricula(id: number) {
         const query = `
-            delete from cursosonline.Matricula where id = ?
+            delete from cursosonline.Matricula where id = ?;
         `;
         const matricula = await this.buscarMatriculaId(id);
         const resultado = await executarSQL(query, [id]);
@@ -80,34 +80,34 @@ export class MatriculaRepository {
         return matricula;
     }
 
-    async existeCopiaMatricula(data: MatriculaDto){
+    async existeCopiaMatricula(data: MatriculaDto) {
         const query = `
             select * from cursosonline.Matricula where alunoId = ? and cursoId = ?;
         `;
         const resultado = await executarSQL(query, [data.alunoId, data.cursoId]);
-        if(resultado[0] == undefined){
+        if (resultado[0] == undefined) {
             return false;
         }
         return true;
     }
 
-    async existeCurso(curso_id: number){
+    async existeCurso(curso_id: number) {
         const query = `
             select * from cursosonline.Curso where id = ?
         `;
         const resultado = await executarSQL(query, [curso_id]);
-        if(resultado[0] == undefined){
+        if (resultado[0] == undefined) {
             throw new Error(`Não existe curso com o id ${curso_id} cadastrado no sistema`);
         }
         return true;
     }
 
-    async existeAluno(aluno_id: number){
+    async existeAluno(aluno_id: number) {
         const query = `
-            select * from cursosonline.Aluno where id = ?
+            select * from cursosonline.Aluno where id = ?;
         `;
         const resultado = await executarSQL(query, [aluno_id]);
-        if(resultado[0] == undefined){
+        if (resultado[0] == undefined) {
             throw new Error(`Não existe aluno com o id ${aluno_id} cadastrado no sistema`);
         }
         return true;

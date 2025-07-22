@@ -17,7 +17,7 @@ export class MatriculaController {
     ) {
         try {
             const instrutor = await this.matriculaService.criarMatricula(dto);
-            sucess(201, new BasicResponseDto("Matricula cadastrada", instrutor))
+            sucess(201, new BasicResponseDto("Matricula cadastrada", instrutor));
         } catch (error: any) {
             console.log(error.message);
             return fail(400, new BasicResponseDto(`Erro ao cadastrar matricula: ${error.message}`, undefined));
@@ -43,9 +43,9 @@ export class MatriculaController {
     async listarMatriculas(
         @Res() sucess: TsoaResponse<200, BasicResponseDto>,
         @Res() fail: TsoaResponse<400, BasicResponseDto>
-    ){
+    ) {
         try {
-            const matriculas = await this.matriculaService.buscarMatriculas()
+            const matriculas = await this.matriculaService.buscarMatriculas();
             sucess(200, new BasicResponseDto("Matriculas encontradas", matriculas));
         } catch (error: any) {
             console.log(error.message);
@@ -58,11 +58,11 @@ export class MatriculaController {
         @Path() id: number,
         @Res() sucess: TsoaResponse<200, BasicResponseDto>,
         @Res() fail: TsoaResponse<400, BasicResponseDto>
-    ){
+    ) {
         try {
             const matricula = await this.matriculaService.removerMatricula(id);
             sucess(200, new BasicResponseDto("Matricula removida", matricula));
-        } catch(error: any) {
+        } catch (error: any) {
             console.log(error.message);
             return fail(400, new BasicResponseDto(`Erro ao remover matricula: ${error.message}`, undefined));
         }

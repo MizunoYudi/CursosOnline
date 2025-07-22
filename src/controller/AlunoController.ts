@@ -18,7 +18,7 @@ export class AlunosController {
     ) {
         try {
             const aluno = await this.alunoService.criarAluno(dto);
-            sucess(201, new BasicResponseDto("Aluno cadastrado", aluno))
+            sucess(201, new BasicResponseDto("Aluno cadastrado", aluno));
         } catch (error: any) {
             console.log(error.message);
             return fail(400, new BasicResponseDto(`Erro ao cadastrar aluno: ${error.message}`, undefined));

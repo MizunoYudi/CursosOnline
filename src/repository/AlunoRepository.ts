@@ -9,7 +9,7 @@ export class AlunoRepository {
         if (!this.instance) {
             this.instance = new AlunoRepository();
         }
-        return this.instance
+        return this.instance;
     }
 
     constructor() {
@@ -23,7 +23,7 @@ export class AlunoRepository {
                 nome VARCHAR(80) NOT NULL,
                 email VARCHAR(80) NOT NULL,
                 cpf VARCHAR(11) NOT NULL
-            )
+            );
         `;
         try {
             const resultado = await executarSQL(query, []);
@@ -44,32 +44,32 @@ export class AlunoRepository {
         return new AlunoEntity(data.nome, data.email, data.cpf, resultado.insertId);
     }
 
-    async buscarAlunoId(id: number){
+    async buscarAlunoId(id: number) {
         const query = `
             select * from cursosonline.Aluno where id = ?;
         `;
         const resultado = await executarSQL(query, [id]);
         const aluno = resultado[0];
-        if(aluno == undefined){
+        if (aluno == undefined) {
             return undefined;
         }
         console.log("Aluno encontrado: ", aluno);
         return new AlunoEntity(aluno.nome, aluno.email, aluno.cpf, aluno.id);
     }
 
-    async buscarAlunos(){
+    async buscarAlunos() {
         const query = `
             select * from cursosonline.Aluno;
         `
         const resultado = await executarSQL(query, []);
-        if(resultado.length == 0){
+        if (resultado.length == 0) {
             return undefined;
         }
         console.log("Alunos encontrados: ", resultado);
         return resultado;
     }
 
-    async atualizarAluno(data: AlunoUpdateDto, id: number){
+    async atualizarAluno(data: AlunoUpdateDto, id: number) {
         const query = `
             update cursosonline.Aluno
                 set nome = ?,
@@ -81,7 +81,7 @@ export class AlunoRepository {
         return this.buscarAlunoId(id);
     }
 
-    async excluirAluno(id: number){
+    async excluirAluno(id: number) {
         const query = `
             delete from cursosonline.Aluno where id = ?;
         `

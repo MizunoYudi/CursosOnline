@@ -46,7 +46,7 @@ export class InstrutorService {
             throw new Error("Insira o id do instrutor a ser removido");
         }
         if (await this.existeInstrutor(id)) {
-            if(await this.instrutorRepository.instrutorInstruiCurso(id)){
+            if (await this.instrutorRepository.instrutorInstruiCurso(id)) {
                 throw new Error("Instrutor possui cursos vinculados");
             }
             return await this.instrutorRepository.excluirInstrutor(id);
@@ -72,7 +72,7 @@ export class InstrutorService {
             e.indexOf(".") > e.indexOf("@") + 1 &&
             e.indexOf(".") < e.length - 1
         ) {
-            return true
+            return true;
         } else {
             throw new Error("Email invalido");
         }

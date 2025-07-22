@@ -17,7 +17,7 @@ export class InstrutorController {
     ) {
         try {
             const instrutor = await this.instrutorService.criarInstrutor(dto);
-            sucess(201, new BasicResponseDto("Instrutor cadastrado", instrutor))
+            sucess(201, new BasicResponseDto("Instrutor cadastrado", instrutor));
         } catch (error: any) {
             console.log(error.message);
             return fail(400, new BasicResponseDto(`Erro ao cadastrar instrutor: ${error.message}`, undefined));

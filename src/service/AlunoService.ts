@@ -10,7 +10,6 @@ export class AlunoService {
         if (!data.nome || !data.email || !data.cpf) {
             throw new Error("Insira os dados obrigatórios: nome, email e cpf");
         }
-
         if (this.validarEmail(data.email)) {
             const aluno = new AlunoEntity(data.nome, data.email, data.cpf);
             return this.alunoRepository.inserirAluno(aluno);
@@ -21,10 +20,9 @@ export class AlunoService {
         if (!id) {
             throw new Error("Insira o id do aluno");
         }
-        if(await this.existeAluno(id)){
+        if (await this.existeAluno(id)) {
             return this.alunoRepository.buscarAlunoId(id);
         }
-
     }
 
     async buscarAlunos() {
@@ -48,14 +46,14 @@ export class AlunoService {
         if (!id) {
             throw new Error("Insira o id do aluno a ser removido");
         }
-        if(await this.existeAluno(id)){
+        if (await this.existeAluno(id)) {
             return await this.alunoRepository.excluirAluno(id);
         }
     }
 
     private async existeAluno(id: number): Promise<boolean> {
         const aluno = await this.alunoRepository.buscarAlunoId(id);
-        if(aluno == undefined){
+        if (aluno == undefined) {
             throw new Error("Aluno não encontrado");
         }
         return true;

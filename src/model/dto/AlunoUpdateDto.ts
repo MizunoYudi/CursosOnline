@@ -1,5 +1,3 @@
-import { AlunoEntity } from "../entity/AlunoEntity";
-
 export class AlunoUpdateDto {
     nome: string;
     email: string;

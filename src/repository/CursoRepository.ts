@@ -24,7 +24,7 @@ export class CursoRepository {
                 descricao VARCHAR(120) NOT NULL,
                 instrutorId INT NOT NULL,
                 FOREIGN KEY (instrutorId) REFERENCES cursosonline.Instrutor(id)
-            )
+            );
         `;
         try {
             const resultado = await executarSQL(query, []);
@@ -34,7 +34,7 @@ export class CursoRepository {
         }
     }
 
-    async inserirCurso(data: CursoEntity){ 
+    async inserirCurso(data: CursoEntity) {
         const query = `
             insert into cursosonline.Curso(titulo, descricao, instrutorId)
                 values(?, ?, ?);
@@ -44,32 +44,32 @@ export class CursoRepository {
         return new CursoEntity(data.titulo, data.descricao, data.instrutorId, resultado.insertId);
     }
 
-    async buscarCursoId(id: number){
+    async buscarCursoId(id: number) {
         const query = `
             select * from cursosonline.Curso where id = ?;
         `;
         const resultado = await executarSQL(query, [id]);
         const curso = resultado[0];
-        if(curso == undefined){
+        if (curso == undefined) {
             return undefined;
         }
         console.log("Curso encontrado: ", curso);
         return new CursoEntity(curso.titulo, curso.descricao, curso.instrutorId, curso.id);
     }
 
-    async buscarCursos(){
+    async buscarCursos() {
         const query = `
             select * from cursosonline.Curso;
         `;
         const resultado = await executarSQL(query, []);
-        if(resultado.length == 0){
+        if (resultado.length == 0) {
             return undefined;
         }
         console.log("Cursos encontrados: ", resultado);
         return resultado;
     }
 
-    async atualizarCurso(data: CursoUpdateDto,id: number){
+    async atualizarCurso(data: CursoUpdateDto, id: number) {
         const query = `
             update cursosonline.Curso
                 set titulo = ?,
@@ -81,9 +81,9 @@ export class CursoRepository {
         return this.buscarCursoId(id);
     }
 
-    async excluirCurso(id: number){
+    async excluirCurso(id: number) {
         const query = `
-            delete from cursosonline.Curso where id = ?
+            delete from cursosonline.Curso where id = ?;
         `;
         const curso = this.buscarCursoId(id);
         const resultado = executarSQL(query, [id]);
@@ -91,12 +91,12 @@ export class CursoRepository {
         return curso;
     }
 
-    async existeInstrutor(instrutor_id: number){
+    async existeInstrutor(instrutor_id: number) {
         const query = `
-            select * from instrutor where id = ?
+            select * from instrutor where id = ?;
         `;
         const resultado = await executarSQL(query, [instrutor_id]);
-        if(resultado[0] == undefined){
+        if (resultado[0] == undefined) {
             return false;
         }
         return true;

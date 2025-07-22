@@ -21,7 +21,7 @@ export class MatriculaService {
             throw new Error("Insira o id do instrutor");
         }
         if (await this.existeMatricula(id)) {
-            return this.matriculaRepository.buscarMatriculaId(id)
+            return this.matriculaRepository.buscarMatriculaId(id);
         }
     }
 
@@ -42,12 +42,12 @@ export class MatriculaService {
         }
     }
 
-    private async validarMatricula(data: MatriculaDto){
-        if(await this.matriculaRepository.existeCopiaMatricula(data)){
+    private async validarMatricula(data: MatriculaDto) {
+        if (await this.matriculaRepository.existeCopiaMatricula(data)) {
             throw new Error("O aluno já esta cadastrado no curso");
         } else {
-            if(await this.existeCursoAluno(data)){
-                return true
+            if (await this.existeCursoAluno(data)) {
+                return true;
             }
         }
     }
@@ -56,13 +56,7 @@ export class MatriculaService {
         const curso = await this.matriculaRepository.existeCurso(data.cursoId);
         const aluno = await this.matriculaRepository.existeAluno(data.alunoId);
         if (!aluno && !curso) {
-            throw new Error(`Não existe curso com o id: ${data.cursoId} nem aluno com id: ${data.alunoId} cadastrado no sistema`)
-        }
-        if (!aluno) {
-            throw new Error(`Não existe aluno com o id ${data.alunoId} cadastrado no sistema`);
-        }
-        if (!curso) {
-            throw new Error(`Não existe curso com o id ${data.cursoId} cadastrado no sistema`)
+            throw new Error(`Não existe curso com o id: ${data.cursoId} nem aluno com id: ${data.alunoId} cadastrado no sistema`);
         }
         return true;
     }
