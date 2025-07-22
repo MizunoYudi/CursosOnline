@@ -9,7 +9,6 @@ export class InstrutorService {
         if (!data.nome || !data.email || !data.especialidade) {
             throw new Error("Insira os dados obrigatórios: nome, email e especialidade");
         }
-
         if (this.validarEmail(data.email)) {
             const instrutor = new InstrutorEntity(data.nome, data.email, data.especialidade);
             return this.instrutorRepository.inserirInstrutor(instrutor);
@@ -20,7 +19,7 @@ export class InstrutorService {
         if (!id) {
             throw new Error("Insira o id do instrutor");
         }
-        if(await this.existeInstrutor(id)){
+        if (await this.existeInstrutor(id)) {
             return this.instrutorRepository.buscarInstrutorId(id);
         }
     }
@@ -46,14 +45,17 @@ export class InstrutorService {
         if (!id) {
             throw new Error("Insira o id do instrutor a ser removido");
         }
-        if(await this.existeInstrutor(id)){
+        if (await this.existeInstrutor(id)) {
+            if(await this.instrutorRepository.instrutorInstruiCurso(id)){
+                throw new Error("Instrutor possui cursos vinculados");
+            }
             return await this.instrutorRepository.excluirInstrutor(id);
         }
     }
 
     private async existeInstrutor(id: number): Promise<boolean> {
         const aluno = await this.instrutorRepository.buscarInstrutorId(id);
-        if(aluno == undefined){
+        if (aluno == undefined) {
             throw new Error("Instrutor não encontrado");
         }
         return true;

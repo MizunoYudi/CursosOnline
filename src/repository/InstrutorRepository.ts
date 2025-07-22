@@ -9,7 +9,7 @@ export class InstrutorRepository {
         if (!this.instance) {
             this.instance = new InstrutorRepository();
         }
-        return this.instance
+        return this.instance;
     }
 
     constructor() {
@@ -23,12 +23,12 @@ export class InstrutorRepository {
                 nome VARCHAR(80) NOT NULL,
                 email VARCHAR(80) NOT NULL,
                 especialidade VARCHAR(80) NOT NULL
-            )
+            );
         `;
         try {
             const resultado = await executarSQL(query, []);
             console.log("Tabela Instrutor criada: ", resultado);
-        } catch(error: any){
+        } catch (error: any) {
             console.log("Erro ao criar tabela Instrutor: ", error);
         }
     }
@@ -44,32 +44,32 @@ export class InstrutorRepository {
         return new InstrutorEntity(data.nome, data.email, data.especialidade, resultado.insertId);
     }
 
-    async buscarInstrutorId(id: number){
+    async buscarInstrutorId(id: number) {
         const query = `
             select * from cursosonline.Instrutor where id = ?;
         `;
         const resultado = await executarSQL(query, [id]);
         const instrutor = resultado[0];
-        if(instrutor == undefined){
+        if (instrutor == undefined) {
             return undefined;
         }
         console.log("Instrutor encontrado: ", instrutor);
         return new InstrutorEntity(instrutor.nome, instrutor.email, instrutor.especialidade, instrutor.id);
     }
 
-    async buscarInstrutores(){
+    async buscarInstrutores() {
         const query = `
             select * from cursosonline.Instrutor;
         `
         const resultado = await executarSQL(query, []);
-        if(resultado.length == 0){
+        if (resultado.length == 0) {
             return undefined;
         }
         console.log("Instrutores encontrados: ", resultado);
         return resultado;
     }
 
-    async atualizarInstrutor(data: InstrutorDto, id: number){
+    async atualizarInstrutor(data: InstrutorDto, id: number) {
         const query = `
             update cursosonline.Instrutor
                 set nome = ?,
@@ -82,7 +82,7 @@ export class InstrutorRepository {
         return this.buscarInstrutorId(id);
     }
 
-    async excluirInstrutor(id: number){
+    async excluirInstrutor(id: number) {
         const query = `
             delete from cursosonline.Instrutor where id = ?;
         `;
@@ -90,5 +90,16 @@ export class InstrutorRepository {
         const resultado = await executarSQL(query, [id]);
         console.log("Instrutor excluido: ", usuario, "\nResultado: ", resultado);
         return usuario;
+    }
+
+    async instrutorInstruiCurso(instrutor_id: number) {
+        const query = `
+            select * from cursosonline.Curso where instrutorId = ?;
+        `;
+        const resultado = await executarSQL(query, [instrutor_id]);
+        if(resultado.length != 0){
+            return true;
+        }
+        return false;
     }
 }
