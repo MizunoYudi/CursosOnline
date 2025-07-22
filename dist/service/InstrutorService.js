@@ -42,6 +42,9 @@ class InstrutorService {
             throw new Error("Insira o id do instrutor a ser removido");
         }
         if (await this.existeInstrutor(id)) {
+            if (await this.instrutorRepository.instrutorInstruiCurso(id)) {
+                throw new Error("Instrutor possui cursos vinculados");
+            }
             return await this.instrutorRepository.excluirInstrutor(id);
         }
     }

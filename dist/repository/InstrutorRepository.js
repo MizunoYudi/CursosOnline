@@ -21,7 +21,7 @@ class InstrutorRepository {
                 nome VARCHAR(80) NOT NULL,
                 email VARCHAR(80) NOT NULL,
                 especialidade VARCHAR(80) NOT NULL
-            )
+            );
         `;
         try {
             const resultado = await (0, mysql_1.executarSQL)(query, []);
@@ -83,6 +83,16 @@ class InstrutorRepository {
         const resultado = await (0, mysql_1.executarSQL)(query, [id]);
         console.log("Instrutor excluido: ", usuario, "\nResultado: ", resultado);
         return usuario;
+    }
+    async instrutorInstruiCurso(instrutor_id) {
+        const query = `
+            select * from cursosonline.Curso where instrutorId = ?;
+        `;
+        const resultado = await (0, mysql_1.executarSQL)(query, [instrutor_id]);
+        if (resultado.length != 0) {
+            return true;
+        }
+        return false;
     }
 }
 exports.InstrutorRepository = InstrutorRepository;

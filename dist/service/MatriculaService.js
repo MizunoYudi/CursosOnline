@@ -53,12 +53,6 @@ class MatriculaService {
         if (!aluno && !curso) {
             throw new Error(`Não existe curso com o id: ${data.cursoId} nem aluno com id: ${data.alunoId} cadastrado no sistema`);
         }
-        if (!aluno) {
-            throw new Error(`Não existe aluno com o id ${data.alunoId} cadastrado no sistema`);
-        }
-        if (!curso) {
-            throw new Error(`Não existe curso com o id ${data.cursoId} cadastrado no sistema`);
-        }
         return true;
     }
     async existeMatricula(id) {

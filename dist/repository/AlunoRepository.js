@@ -21,7 +21,7 @@ class AlunoRepository {
                 nome VARCHAR(80) NOT NULL,
                 email VARCHAR(80) NOT NULL,
                 cpf VARCHAR(11) NOT NULL
-            )
+            );
         `;
         try {
             const resultado = await (0, mysql_1.executarSQL)(query, []);

@@ -22,7 +22,7 @@ class CursoRepository {
                 descricao VARCHAR(120) NOT NULL,
                 instrutorId INT NOT NULL,
                 FOREIGN KEY (instrutorId) REFERENCES cursosonline.Instrutor(id)
-            )
+            );
         `;
         try {
             const resultado = await (0, mysql_1.executarSQL)(query, []);
@@ -77,7 +77,7 @@ class CursoRepository {
     }
     async excluirCurso(id) {
         const query = `
-            delete from cursosonline.Curso where id = ?
+            delete from cursosonline.Curso where id = ?;
         `;
         const curso = this.buscarCursoId(id);
         const resultado = (0, mysql_1.executarSQL)(query, [id]);
@@ -86,7 +86,7 @@ class CursoRepository {
     }
     async existeInstrutor(instrutor_id) {
         const query = `
-            select * from instrutor where id = ?
+            select * from instrutor where id = ?;
         `;
         const resultado = await (0, mysql_1.executarSQL)(query, [instrutor_id]);
         if (resultado[0] == undefined) {

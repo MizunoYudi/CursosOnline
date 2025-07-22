@@ -23,7 +23,7 @@ class MatriculaRepository {
                     dataMatricula date NOT NULL,
                     FOREIGN KEY(alunoId) REFERENCES cursosonline.Aluno(id),
                     FOREIGN KEY(cursoId) REFERENCES cursosonline.Curso(id)
-                )
+                );
             `;
         try {
             const resultado = await (0, mysql_1.executarSQL)(query, []);
@@ -40,12 +40,11 @@ class MatriculaRepository {
         `;
         const resultado = await (0, mysql_1.executarSQL)(query, [data.alunoId, data.cursoId, data.dataMatricula]);
         console.log("Matricula inserida: ", resultado);
-        console.log(resultado.insertId);
-        return await this.buscarMatriculaId(resultado.insertId);
+        return new MatriculaEntity_1.MatriculaEntity(data.alunoId, data.cursoId, data.dataMatricula, resultado.insertId);
     }
     async buscarMatriculaId(id) {
         const query = `
-            select * from cursosonline.Matricula where id = ?
+            select * from cursosonline.Matricula where id = ?;
         `;
         const resultado = await (0, mysql_1.executarSQL)(query, [id]);
         const matricula = resultado[0];
@@ -68,7 +67,7 @@ class MatriculaRepository {
     }
     async excluirMatricula(id) {
         const query = `
-            delete from cursosonline.Matricula where id = ?
+            delete from cursosonline.Matricula where id = ?;
         `;
         const matricula = await this.buscarMatriculaId(id);
         const resultado = await (0, mysql_1.executarSQL)(query, [id]);
@@ -97,7 +96,7 @@ class MatriculaRepository {
     }
     async existeAluno(aluno_id) {
         const query = `
-            select * from cursosonline.Aluno where id = ?
+            select * from cursosonline.Aluno where id = ?;
         `;
         const resultado = await (0, mysql_1.executarSQL)(query, [aluno_id]);
         if (resultado[0] == undefined) {
